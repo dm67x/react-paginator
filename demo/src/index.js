@@ -15,7 +15,7 @@ class Demo extends Component {
 
   render() {
     return <div className="container">
-      <h1>react-paginator Demo</h1>
+      <h1>react_paginator Demo</h1>
       <Paginator>
         {this.example_datas()}
       </Paginator>
