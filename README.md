@@ -4,7 +4,13 @@
 [![npm package][npm-badge]][npm]
 [![Coveralls][coveralls-badge]][coveralls]
 
-Describe react-paginator here.
+![Screenshot from demo](images/demo1_screen.png)
+
+React-Paginator is a react component to create a great and easy to use pagination system. Currently this component use Twitter Bootstrap style, so if you want to use it you must be add Bootstrap to your project.
+
+### Usage
+
+`npm i --save react_paginator`
 
 [build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
 [build]: https://travis-ci.org/user/repo
