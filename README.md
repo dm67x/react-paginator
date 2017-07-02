@@ -40,11 +40,11 @@ Three steps to start with react_paginator ;)
 
 ### Props
 
-| Name    | Type    | Description                                      |
-|---------|---------|--------------------------------------------------|
-| perPage | Integer | Number of elements you want to show on each page |
-| bsClass | String | Base class of pagination system |
-| prevIcon | Node | Previous page icon |
-| nextIcon | Node | Next page icon |
-| liClass | String | Li element class |
-| showOnly | Integer | Number of pages to show |
+| Name    | Type    | Description                                      | Default Value |
+|---------|---------|--------------------------------------------------|---------------|
+| perPage | Integer | Number of elements you want to show on each page | 1 |
+| bsClass | String | Base class of pagination system | pagination |
+| prevIcon | Node | Previous page icon | null |
+| nextIcon | Node | Next page icon | null |
+| liClass | String | Li element class | null |
+| showOnly | Integer | Number of pages to show | 5 |
