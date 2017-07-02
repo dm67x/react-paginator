@@ -25,7 +25,7 @@ export default class Paginator extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       currentPage: 1,
-      numberOfPages: Math.ceil(React.Children.count(nextProps.children.length) / nextProps.perPage),
+      numberOfPages: Math.ceil(React.Children.count(nextProps.children) / nextProps.perPage),
       start_index: 0,
       end_index: nextProps.perPage
     })
