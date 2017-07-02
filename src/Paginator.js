@@ -3,7 +3,12 @@ import React from 'react'
 export default class Paginator extends React.Component {
 
   static defaultProps = {
-    perPage: 1
+    perPage: 1,
+    bsClass: "pagination",
+    prevIcon: null,
+    nextIcon: null,
+    liClass: null,
+    showOnly: 5
   }
 
   constructor(props) {
@@ -30,12 +35,46 @@ export default class Paginator extends React.Component {
     let list = []
     for (let i = 1; i <= this.state.numberOfPages; i++) {
       list.push(
-        <li key={i} className={(i === this.state.currentPage) ? "active" : ""}>
+        <li key={i} className={(i === this.state.currentPage) ? "active" : this.props.liClass}>
           <a onClick={this.goTo.bind(this, i)}>{i}</a>
         </li>
       )
     }
     return list
+  }
+
+  showListOfPages() {
+    let list = this.listOfPages()
+
+    const { showOnly, liClass } = this.props
+    const { numberOfPages, currentPage } = this.state
+
+    let cond = numberOfPages - showOnly
+
+    if (numberOfPages - (currentPage-1) > this.props.showOnly) {
+      let current = []
+      let i = currentPage
+      let n = Math.floor(showOnly / 2)
+
+      for (let x = 0; x < n; x++) {
+        current.push(list[(i-1)+x])
+      }
+
+      current.push(
+        <li key={0} className={liClass}>
+          <a>...</a>
+        </li>
+      )
+
+      for (let x = n; x > 0; x--) {
+        current.push(list[numberOfPages - x])
+      }
+
+      return current
+    
+    } else {
+      return list.slice(cond, numberOfPages)
+    }
   }
 
   goTo(page, event) {
@@ -74,22 +113,23 @@ export default class Paginator extends React.Component {
   render() {
 
     const { start_index, end_index, currentPage, numberOfPages } = this.state
+    const { bsClass, children, nextIcon, prevIcon, liClass } = this.props
 
     return (
       <div className="paginator">
         <div className="row">
-          {React.Children.toArray(this.props.children).slice(start_index, end_index)}
+          {React.Children.toArray(children).slice(start_index, end_index)}
         </div>
 
-        <ul className="pagination">
-          <li className={(currentPage === 1) ? "disabled" : ""}>
-            <a onClick={this.prevPage.bind(this)}><i className="glyphicon glyphicon-chevron-left"></i></a>
+        <ul className={bsClass}>
+          <li className={(currentPage === 1) ? "disabled" : liClass}>
+            <a onClick={this.prevPage.bind(this)}>{prevIcon}</a>
           </li>
 
-          {this.listOfPages()}
+          {this.showListOfPages()}
 
-          <li className={(currentPage === numberOfPages) ? "disabled" : ""}>
-            <a onClick={this.nextPage.bind(this)}><i className="glyphicon glyphicon-chevron-right"></i></a>
+          <li className={(currentPage === numberOfPages) ? "disabled" : liClass}>
+            <a onClick={this.nextPage.bind(this)}>{nextIcon}</a>
           </li>
         </ul>
       </div>

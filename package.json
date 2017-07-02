@@ -1,7 +1,7 @@
 {
   "name": "react_paginator",
-  "version": "1.0.2",
-  "description": "react-paginator React component to create a good pagination system (currently with Bootstrap)",
+  "version": "1.0.3",
+  "description": "react-paginator React component to create a good pagination system",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
@@ -28,9 +28,9 @@
     "react-dom": "^15.6.1"
   },
   "author": "dm67x",
-  "homepage": "https://github.com/dm67x/react-paginator",
+  "homepage": "https://github.com/dm67x/react_paginator",
   "license": "MIT",
-  "repository": "dm67x/react-paginator",
+  "repository": "dm67x/react_paginator",
   "keywords": [
     "react-component",
     "react",

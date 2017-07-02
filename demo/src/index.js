@@ -8,7 +8,7 @@ class Demo extends Component {
   example_datas() {
     let datas = []
     for (var i = 0; i < 10; i++) {
-      datas.push(<img src="http://lorempixel.com/400/200/animals/" alt={"Animal" + (i+1)}/>)
+      datas.push(<img src="http://lorempixel.com/400/200/animals/" alt={"Animal" + (i+1)} key={i}/>)
     }
     return datas
   }
@@ -16,7 +16,11 @@ class Demo extends Component {
   render() {
     return <div className="container">
       <h1>react_paginator Demo</h1>
-      <Paginator>
+      <h3>Materialize version</h3>
+      <Paginator 
+        prevIcon={<i className="material-icons">chevron_left</i>} 
+        nextIcon={<i className="material-icons">chevron_right</i>}
+        liClass="waves-effect">
         {this.example_datas()}
       </Paginator>
     </div>

@@ -1,12 +1,12 @@
 # react_paginator
 
-[![Travis][build-badge]][build]
-[![npm package][npm-badge]][npm]
-[![Coveralls][coveralls-badge]][coveralls]
+[![NPM](https://nodei.co/npm/react_paginator.png?compact=true)](https://npmjs.org/package/react_paginator)
 
 ![Screenshot from demo](img/demo1_screen.png)
+![Screenshot from demo with MaterializeCSS](img/materialize_demo.png)
 
-React-Paginator is a react component to create a great and easy to use pagination system. Currently this component use Twitter Bootstrap style, so if you want to use it you must be add Bootstrap to your project.
+React-Paginator is a react component to create a great and easy to use pagination system.
+You can customize it to adapt to your style
 
 ### Usage
 
@@ -25,17 +25,26 @@ Three steps to start with react_paginator ;)
 </Paginator>
 ```
 
+### Example with MaterializeCSS
+
+```javascript
+<Paginator 
+  prevIcon={<i className="material-icons">chevron_left</i>} 
+  nextIcon={<i className="material-icons">chevron_right</i>}
+  liClass="waves-effect">
+
+  // Elements...
+
+</Paginator>
+```
+
 ### Props
 
 | Name    | Type    | Description                                      |
 |---------|---------|--------------------------------------------------|
 | perPage | Integer | Number of elements you want to show on each page |
-
-[build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
-[build]: https://travis-ci.org/dm67x/react_paginator
-
-[npm-badge]: https://img.shields.io/npm/v/npm-package.png?style=flat-square
-[npm]: https://www.npmjs.com/package/react_paginator
-
-[coveralls-badge]: https://img.shields.io/coveralls/user/repo/master.png?style=flat-square
-[coveralls]: https://coveralls.io/github/dm67x/react_paginator
+| bsClass | String | Base class of pagination system |
+| prevIcon | Node | Previous page icon |
+| nextIcon | Node | Next page icon |
+| liClass | String | Li element class |
+| showOnly | Integer | Number of pages to show |
