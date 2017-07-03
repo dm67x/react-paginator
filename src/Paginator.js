@@ -1,6 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-export default class Paginator extends React.Component {
+class Paginator extends React.Component {
 
   static defaultProps = {
     perPage: 1,
@@ -11,26 +12,30 @@ export default class Paginator extends React.Component {
     pageNextClass: null,
     pagePrevClass: null,
     blankClass: null,
-    showOnly: 5
+    firstPageLabel: null,
+    lastPageLabel: null,
+    showOnly: 5,
+    showPage: 1,
+    onPageChanged: null
   }
 
   constructor(props) {
     super(props)
 
     this.state = {
-      currentPage: 1,
-      numberOfPages: Math.ceil(React.Children.count(this.props.children) / this.props.perPage),
-      start_index: 0,
-      end_index: props.perPage
+      currentPage: props.showPage,
+      numberOfPages: Math.ceil(React.Children.count(props.children) / props.perPage),
+      start_index: (props.showPage - 1) * props.perPage,
+      end_index: (props.showPage - 1) * props.perPage + props.perPage
     }
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      currentPage: 1,
+      currentPage: nextProps.showPage,
       numberOfPages: Math.ceil(React.Children.count(nextProps.children) / nextProps.perPage),
-      start_index: 0,
-      end_index: nextProps.perPage
+      start_index: (nextProps.showPage - 1) * nextProps.children,
+      end_index: (nextProps.showPage - 1) * nextProps.children + nextProps.perPage
     })
   }
 
@@ -39,7 +44,7 @@ export default class Paginator extends React.Component {
     for (let i = 1; i <= this.state.numberOfPages; i++) {
       list.push(
         <li key={i} className={this.props.pageClass + " " + ((i === this.state.currentPage) ? "active" : "")}>
-          <a onClick={this.goTo.bind(this, i)}>{i}</a>
+          <a style={{cursor: "pointer"}} onClick={this.goTo.bind(this, i)}>{i}</a>
         </li>
       )
     }
@@ -83,34 +88,56 @@ export default class Paginator extends React.Component {
   goTo(page, event) {
     event.preventDefault()
     if (page > 0 && page <= this.state.numberOfPages) {
-      this.setState(prevState => ({
-        currentPage: page,
-        start_index: (page - 1) * this.props.perPage,
-        end_index: (page - 1) * this.props.perPage + this.props.perPage
-      }))
+      this.setState((prevState, props) => {
+        return {
+          currentPage: page,
+          start_index: (page - 1) * props.perPage,
+          end_index: (page - 1) * props.perPage + props.perPage
+        }
+      })
+
+      if (this.props.onPageChanged) this.props.onPageChanged(page)
     }
   }
 
   nextPage(event) {
     event.preventDefault()
     if (this.state.currentPage < this.state.numberOfPages) {
-      this.setState(prevState => ({
-        currentPage: prevState.currentPage + 1,
-        start_index: prevState.start_index + this.props.perPage,
-        end_index: prevState.end_index + this.props.perPage
-      }))
+      this.setState((prevState, props) => {
+        return {
+          currentPage: prevState.currentPage + 1,
+          start_index: prevState.start_index + props.perPage,
+          end_index: prevState.end_index + props.perPage
+        }
+      })
+      
+      if (this.props.onPageChanged) this.props.onPageChanged(this.state.currentPage + 1)
     }
   }
 
   prevPage(event) {
     event.preventDefault()
     if (this.state.currentPage > 1) {
-      this.setState(prevState => ({
-        currentPage: prevState.currentPage - 1,
-        start_index: prevState.start_index - this.props.perPage,
-        end_index: prevState.end_index - this.props.perPage
-      }))
+      this.setState((prevState, props) => {
+        return {
+          currentPage: prevState.currentPage - 1,
+          start_index: prevState.start_index - props.perPage,
+          end_index: prevState.end_index - props.perPage
+        }
+      })
+      
+      if (this.props.onPageChanged) this.props.onPageChanged(this.state.currentPage - 1)
     }
+  }
+
+  setPage(page) {
+    this.setState({
+      currentPage: page,
+      start_index: (page - 1) * this.props.perPage,
+      end_index: (page - 1) * this.props.perPage + this.props.perPage
+    })
+    
+    if (this.props.onPageChanged) this.props.onPageChanged(page)
   }
 
   render() {
@@ -122,7 +149,9 @@ export default class Paginator extends React.Component {
       nextIcon, 
       prevIcon, 
       pagePrevClass, 
-      pageNextClass
+      pageNextClass,
+      firstPageLabel,
+      lastPageLabel
     } = this.props
 
     return (
@@ -130,18 +159,41 @@ export default class Paginator extends React.Component {
         {React.Children.toArray(children).slice(start_index, end_index)}
 
         <ul className={bsClass}>
+
+          {firstPageLabel}
+
           <li className={pagePrevClass + " " + ((currentPage === 1) ? "disabled" : "")}>
-            <a onClick={this.prevPage.bind(this)}>{prevIcon}</a>
+            <a style={{cursor: "pointer"}} onClick={this.prevPage.bind(this)}>{prevIcon}</a>
           </li>
 
           {this.showListOfPages()}
 
           <li className={pageNextClass + " " + ((currentPage === numberOfPages) ? "disabled" : "")}>
-            <a onClick={this.nextPage.bind(this)}>{nextIcon}</a>
+            <a style={{cursor: "pointer"}} onClick={this.nextPage.bind(this)}>{nextIcon}</a>
           </li>
+
+          {lastPageLabel}
         </ul>
       </div>
     )
   }
 
 }
+
+Paginator.propTypes = {
+  perPage: PropTypes.number,
+  bsClass: PropTypes.string,
+  prevIcon: PropTypes.node,
+  nextIcon: PropTypes.node,
+  pageClass: PropTypes.string,
+  pageNextClass: PropTypes.string,
+  pagePrevClass: PropTypes.string,
+  blankClass: PropTypes.string,
+  firstPageLabel: PropTypes.node,
+  lastPageLabel: PropTypes.node,
+  showOnly: PropTypes.number,
+  showPage: PropTypes.number,
+  onPageChanged: PropTypes.func
+}
+
+export default Paginator

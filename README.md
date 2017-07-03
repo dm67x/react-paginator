@@ -57,3 +57,7 @@ Three steps to start with react_paginator ;)
 | pagePrevClass | String | Previous (li) element class | null |
 | blankClass | String | [...] element class | null |
 | showOnly | Integer | Number of pages to show | 5 |
+| firstPageLabel | Node | Go to first page element | null |
+| lastPageLabel | Node | Go to last page element | null |
+| showPage | Integer | Page to show | 1 |
+| onPageChanged | Function | Event triggered when page change | null | 
