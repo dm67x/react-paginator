@@ -16,7 +16,8 @@ class Paginator extends React.Component {
     lastPageLabel: null,
     showOnly: 5,
     showPage: 1,
-    onPageChanged: null
+    onPageChanged: null,
+    list: null
   }
 
   constructor(props) {
@@ -156,24 +157,27 @@ class Paginator extends React.Component {
 
     return (
       <div className="paginator">
-        {React.Children.toArray(children).slice(start_index, end_index)}
+        {children.length > 1 && children.slice(start_index, end_index) || children}
 
-        <ul className={bsClass}>
-
+        <div>
           {firstPageLabel}
 
-          <li className={pagePrevClass + " " + ((currentPage === 1) ? "disabled" : "")}>
-            <a style={{cursor: "pointer"}} onClick={this.prevPage.bind(this)}>{prevIcon}</a>
-          </li>
+          <ul className={bsClass}>
 
-          {this.showListOfPages()}
+            <li className={pagePrevClass + " " + ((currentPage === 1) ? "disabled" : "")}>
+              <a style={{cursor: "pointer"}} onClick={this.prevPage.bind(this)}>{prevIcon}</a>
+            </li>
 
-          <li className={pageNextClass + " " + ((currentPage === numberOfPages) ? "disabled" : "")}>
-            <a style={{cursor: "pointer"}} onClick={this.nextPage.bind(this)}>{nextIcon}</a>
-          </li>
+            {this.showListOfPages()}
+
+            <li className={pageNextClass + " " + ((currentPage === numberOfPages) ? "disabled" : "")}>
+              <a style={{cursor: "pointer"}} onClick={this.nextPage.bind(this)}>{nextIcon}</a>
+            </li>
+
+          </ul>
 
           {lastPageLabel}
-        </ul>
+        </div>
       </div>
     )
   }
