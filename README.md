@@ -2,8 +2,14 @@
 
 [![NPM](https://nodei.co/npm/react_paginator.png?compact=true)](https://npmjs.org/package/react_paginator)
 
+### Bootstrap theme
 ![Screenshot from demo](img/demo1_screen.png)
+
+### Materialize theme
 ![Screenshot from demo with MaterializeCSS](img/materialize_demo.png)
+
+### Custom materialize theme
+![Custom Materialize Theme](img/custom_materialize.png)
 
 React-Paginator is a react component to create a great and easy to use pagination system.
 You can customize it to adapt to your style
@@ -46,5 +52,10 @@ Three steps to start with react_paginator ;)
 | bsClass | String | Base class of pagination system | pagination |
 | prevIcon | Node | Previous page icon | null |
 | nextIcon | Node | Next page icon | null |
-| liClass | String | Li element class | null |
+| pageClass | String | Li element class | null |
+| pageNextClass | String | Next (li) element class | null |
+| pagePrevClass | String | Previous (li) element class | null |
+| pageNextLinkClass | String | Next link element class (a) | null |
+| pagePrevLinkClass | String | Previous link element class (a) | null |
+| blankClass | String | [...] element class | null |
 | showOnly | Integer | Number of pages to show | 5 |

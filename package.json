@@ -1,6 +1,6 @@
 {
   "name": "react_paginator",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "react-paginator React component to create a good pagination system",
   "main": "lib/index.js",
   "module": "es/index.js",

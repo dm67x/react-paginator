@@ -3,6 +3,8 @@ import {render} from 'react-dom'
 
 import Paginator from '../../src/Paginator'
 
+import './index.css'
+
 class Demo extends Component {
 
   example_datas() {
@@ -20,7 +22,11 @@ class Demo extends Component {
       <Paginator 
         prevIcon={<i className="material-icons">chevron_left</i>} 
         nextIcon={<i className="material-icons">chevron_right</i>}
-        liClass="waves-effect">
+        pageClass="waves-effect"
+        pageNextClass="next"
+        pagePrevClass="prev"
+        blankClass="blank"
+        >
         {this.example_datas()}
       </Paginator>
     </div>
