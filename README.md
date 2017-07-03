@@ -55,7 +55,5 @@ Three steps to start with react_paginator ;)
 | pageClass | String | Li element class | null |
 | pageNextClass | String | Next (li) element class | null |
 | pagePrevClass | String | Previous (li) element class | null |
-| pageNextLinkClass | String | Next link element class (a) | null |
-| pagePrevLinkClass | String | Previous link element class (a) | null |
 | blankClass | String | [...] element class | null |
 | showOnly | Integer | Number of pages to show | 5 |
