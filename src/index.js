@@ -1,2 +1,5 @@
-import Paginator from './Paginator'
-export default Paginator
+export Paginator from './Paginator'
+export PaginationNav from './PaginationNav'
+export PaginationLabel from './PaginationLabel'
+export PaginationContent from './PaginationContent'
+export PaginationIconNav from './PaginationIconNav'

@@ -1,3 +1,47 @@
+# In development (v2)
+
+Add more modular modules.
+
+### Example of pagination system with this version
+
+```javascript
+<Paginator>
+
+  <PaginationContent start={(currentPage-1) * perPage} end={(currentPage - 1) * perPage + perPage}>
+    // your datas
+  </PaginationContent>
+
+  <PaginationLabel 
+    disabled={currentPage == 1} 
+    iclass="first" 
+    value="First" 
+    onClick={() => this.firstPage()}/>
+
+  <PaginationIconNav
+    icon={<i className="material-icons">chevron_left</i>}
+    disabled={currentPage === 1}
+    iclass="next"
+    onClick={() => this.prevPage()}
+  />
+
+  {navLinks}
+
+  <PaginationIconNav
+    icon={<i className="material-icons">chevron_right</i>}
+    disabled={currentPage === numberOfPages}
+    iclass="prev"
+    onClick={() => this.nextPage()}
+  />
+
+  <PaginationLabel 
+    disabled={currentPage == numberOfPages} 
+    iclass="last" 
+    value="Last" 
+    onClick={() => this.lastPage()}/>
+
+</Paginator>
+```
+
 # react_paginator
 
 [![NPM](https://nodei.co/npm/react_paginator.png?compact=true)](https://npmjs.org/package/react_paginator)
